@@ -39,17 +39,10 @@ def hinge_loss_single(feature_vector, label, theta, theta_0):
         parameters.
     """
     # Your code here
-    loss = 0.0
-    if label*(feature_vector*theta+ theta_0) == 1:
-        loss = loss
-    else:
-        loss += 1.0
-    return feature_vector,label,theta,theta_0,loss 
-    raise NotImplementedError
+    loss = max(0, 1 - label * (np.dot(feature_vector, theta) + theta_0))
 
-print(hinge_loss_single([0.61648309 0.64808346 0.2150902  0.19678152 0.09615305 0.82310805
- 0.30476803 0.93480963 0.31050631 0.12920451],1.0,[0.08110522 0.07715056 0.23246061 0.2540889  0.5200043  0.06074537
- 0.1640592  0.05348683 0.16102732 0.38698339],0.5))
+    return loss
+    raise NotImplementedError
 
 
 def hinge_loss_full(feature_matrix, labels, theta, theta_0):
@@ -70,6 +63,10 @@ def hinge_loss_full(feature_matrix, labels, theta, theta_0):
     """
 
     # Your code here
+    loss = 0.0
+    for i, j in zip(feature_matrix, labels):
+        loss += hinge_loss_single(i, j, theta, theta_0)
+    return loss
     raise NotImplementedError
 
 
