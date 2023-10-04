@@ -301,6 +301,14 @@ def classify(feature_matrix, theta, theta_0):
         should be considered a positive classification.
     """
     # Your code here
+    classified = np.zeros(len(feature_matrix), )
+    for i in range(feature_matrix.shape[0]):
+        if np.dot(feature_matrix[i], theta) + theta_0 > 0:
+            classified[i] = 1
+        else:
+            classified[i] = -1
+
+    return classified
     raise NotImplementedError
 
 
@@ -338,8 +346,12 @@ def classifier_accuracy(
         accuracy of the trained classifier on the validation data.
     """
     # Your code here
-    raise NotImplementedError
-
+    theta, theta_0 = classifier(train_feature_matrix, train_labels, **kwargs)
+    train_class = classify(train_feature_matrix, theta, theta_0)
+    val_class = classify(val_feature_matrix, theta, theta_0)
+    train_error = accuracy(train_class, train_labels)
+    val_error = accuracy(val_class, val_labels)
+    return (train_error, val_error)
 
 
 def extract_words(text):
@@ -359,7 +371,6 @@ def extract_words(text):
     return text.lower().split()
 
 
-
 def bag_of_words(texts, remove_stopword=False):
     """
     NOTE: feel free to change this code as guided by Section 3 (e.g. remove
@@ -372,6 +383,10 @@ def bag_of_words(texts, remove_stopword=False):
         integer `index`.
     """
     # Your code here
+    stop_words = set()
+    if remove_stopword:
+        with open('stopwords.txt', 'r') as f:
+            stop_words = set(f.read().split())
     # raise NotImplementedError
     
     indices_by_word = {}  # maps word to unique index
@@ -379,7 +394,7 @@ def bag_of_words(texts, remove_stopword=False):
         word_list = extract_words(text)
         for word in word_list:
             if word in indices_by_word: continue
-            # if word in stopword: continue
+            if word in stopword: continue
             indices_by_word[word] = len(indices_by_word)
 
     return indices_by_word
