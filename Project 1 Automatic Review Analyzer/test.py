@@ -120,6 +120,7 @@ def check_hinge_loss_single():
     log(green("PASS"), ex_name, "")
 
 
+
 def check_hinge_loss_full():
     ex_name = "Hinge loss full"
 
