@@ -192,7 +192,7 @@ def check_run_gradient_descent_iteration():
     zeros = np.zeros((k, d))
     alpha = 2
     temp = 0.2
-    lambda_factor = 0.5
+    lambda_factor = 1.5
     exp_res = np.zeros((k, d))
     exp_res = np.array([
        [ -7.14285714,  -5.23809524,  -3.33333333,  -1.42857143, 0.47619048],
