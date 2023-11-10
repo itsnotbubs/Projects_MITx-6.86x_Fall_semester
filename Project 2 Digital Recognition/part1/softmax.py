@@ -128,6 +128,10 @@ def update_y(train_y, test_y):
                     for each datapoint in the test set
     """
     #YOUR CODE HERE
+    train_y_mod3 = train_y % 3
+    test_y_mod3 = test_y % 3
+
+    return train_y_mod3, test_y_mod3
     raise NotImplementedError
 
 def compute_test_error_mod3(X, Y, theta, temp_parameter):
@@ -146,6 +150,19 @@ def compute_test_error_mod3(X, Y, theta, temp_parameter):
         test_error - the error rate of the classifier (scalar)
     """
     #YOUR CODE HERE
+    estimated_Y = get_classification(X, theta, temp_parameter)
+
+    # rescale based on mod 3
+    estimated_Y_mod3 = estimated_Y % 3
+
+    correct_Y_mod3 = Y % 3
+
+    # Compute the number of mismatches
+    mismatches = np.sum(estimated_Y_mod3 != correct_Y_mod3)
+
+    test_error = mismatches / len(Y)
+
+    return test_error
     raise NotImplementedError
 
 def softmax_regression(X, Y, temp_parameter, alpha, lambda_factor, k, num_iterations):

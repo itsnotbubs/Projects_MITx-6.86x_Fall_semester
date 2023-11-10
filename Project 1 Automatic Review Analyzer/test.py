@@ -169,7 +169,7 @@ def check_perceptron():
             exp_res, feature_matrix, labels, T):
         return
 
-    feature_matrix = np.array([[1, 2], [-1, 0]])
+    feature_matrix = np.array([[1,1], [-1, 1]])
     labels = np.array([1, 1])
     T = 1
     exp_res = (np.array([0, 2]), 2)

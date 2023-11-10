@@ -16,6 +16,10 @@ def project_onto_PC(X, pcs, n_components, feature_means):
     #       of the eigenvectors returned by principal_components().
     #       Note that each eigenvector is already be a unit-vector,
     #       so the projection may be done using matrix multiplication.
+    center_X = X-feature_means
+    top_pcs = pcs[:, :n_components]
+    proj = center_X @ top_pcs
+    return proj
     raise NotImplementedError
 
 

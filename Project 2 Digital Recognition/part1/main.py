@@ -106,7 +106,7 @@ def run_softmax_on_MNIST(temp_parameter=1):
         Final test error
     """
     train_x, train_y, test_x, test_y = get_MNIST_data()
-    theta, cost_function_history = softmax_regression(train_x, train_y, temp_parameter, alpha=0.3, lambda_factor=1.0e-4, k=10, num_iterations=150)
+    theta, cost_function_history = softmax_regression(train_pca,test_pca, temp_parameter, alpha=0.3, lambda_factor=1.0e-4, k=10, num_iterations=150)
     plot_cost_function_over_time(cost_function_history)
     test_error = compute_test_error(test_x, test_y, theta, temp_parameter)
     # Save the model parameters theta obtained from calling softmax_regression to disk.
@@ -117,7 +117,7 @@ def run_softmax_on_MNIST(temp_parameter=1):
     return test_error
 
 
-print('softmax test_error=', run_softmax_on_MNIST(temp_parameter= 0.5))
+print('softmax test_error=', run_softmax_on_MNIST(temp_parameter= 1))
 
 # TODO: Find the error rate for temp_parameter = [.5, 1.0, 2.0]
 #      Remember to return the tempParameter to 1, and re-run run_softmax_on_MNIST
@@ -128,15 +128,16 @@ print('softmax test_error=', run_softmax_on_MNIST(temp_parameter= 0.5))
 
 
 
-def run_softmax_on_MNIST_mod3(temp_parameter=1):
-    """
-    Trains Softmax regression on digit (mod 3) classifications.
-
-    See run_softmax_on_MNIST for more info.
-    """
-    # YOUR CODE HERE
-    raise NotImplementedError
-
+# def run_softmax_on_MNIST_mod3(temp_parameter=1):
+#     """
+#     Trains Softmax regression on digit (mod 3) classifications.
+#
+#     See run_softmax_on_MNIST for more info.
+#     """
+#     # YOUR CODE HERE
+#     c = compute_test_error_mod3(X, Y, theta, temp_parameter)
+#     return c
+#     raise NotImplementedError
 
 # TODO: Run run_softmax_on_MNIST_mod3(), report the error rate
 
@@ -161,6 +162,7 @@ test_pca = project_onto_PC(test_x, pcs, n_components, feature_means)
 # train_pca (and test_pca) is a representation of our training (and test) data
 # after projecting each example onto the first 18 principal components.
 
+print(softmax_regression(train_pca,test_pca))
 
 # TODO: Train your softmax regression model using (train_pca, train_y)
 #       and evaluate its accuracy on (test_pca, test_y).

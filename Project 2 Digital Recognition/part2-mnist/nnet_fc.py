@@ -44,7 +44,7 @@ def main():
               nn.Linear(10, 10),
             )
     lr=0.1
-    momentum=0
+    momentum=0.0
     ##################################
 
     train_model(train_batches, dev_batches, model, lr=lr, momentum=momentum)
